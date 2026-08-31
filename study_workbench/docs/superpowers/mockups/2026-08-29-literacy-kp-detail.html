@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>字详情 · 三题型答题情况 mockup</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --panel: #fff;
+      --ink: #334155;
+      --muted: #94a3b8;
+      --line: #e2e8f0;
+      --brand: #e85d75;
+      --ok: #0d9488;
+      --learn: #38bdf8;
+      --shaky: #f59e0b;
+      --ns: #cbd5e1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+      background: linear-gradient(135deg, #e2e8f0, #f8fafc 40%, #fce7f3);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .frame {
+      width: min(384px, 100%);
+      background: var(--panel);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .eyebrow { font-size: 12px; color: var(--muted); }
+    h1 { margin: 0; font-size: 22px; }
+    .banner {
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+    .banner strong { display: block; margin-bottom: 4px; }
+    .banner span { font-size: 12px; opacity: 0.9; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      margin: 0 0 8px;
+    }
+    .skills { display: flex; flex-direction: column; gap: 8px; }
+    .skill {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fafafa;
+    }
+    .skill .tag {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 14px;
+      color: #fff;
+    }
+    .skill.mastered .tag { background: var(--ok); }
+    .skill.learning .tag { background: var(--learn); }
+    .skill.not_started .tag { background: var(--ns); color: #64748b; }
+    .skill .name { font-size: 14px; font-weight: 600; }
+    .skill .meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .skill .status {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 8px; border-radius: 999px;
+    }
+    .skill.mastered .status { background: #ccfbf1; color: #0f766e; }
+    .skill.learning .status { background: #e0f2fe; color: #0369a1; }
+    .skill.not_started .status { background: #f1f5f9; color: #64748b; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .stat {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .stat dt { font-size: 11px; color: var(--muted); }
+    .stat dd { margin: 2px 0 0; font-weight: 600; }
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      background: var(--brand);
+      color: #fff;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: default;
+    }
+    .history { display: flex; flex-direction: column; gap: 6px; }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+    .row .left { display: flex; align-items: center; gap: 8px; color: #64748b; }
+    .pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #fff;
+    }
+    .pill.listen { background: #0d9488; }
+    .pill.sense { background: #6366f1; }
+    .pill.char { background: #db2777; }
+    .pill.mark { background: var(--brand); }
+    .note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <aside class="frame" aria-label="字详情 mockup">
+    <div>
+      <div class="eyebrow">识字 · 第1组</div>
+      <h1>一</h1>
+    </div>
+
+    <div class="banner">
+      <strong>学习中</strong>
+      <span>三种题型未全部过关 · 字变绿需听/义/字都过</span>
+    </div>
+
+    <section>
+      <h2 class="section-title">题型掌握</h2>
+      <div class="skills">
+        <div class="skill mastered">
+          <div class="tag">听</div>
+          <div>
+            <div class="name">听音选字</div>
+            <div class="meta">练 4 次 · 正确率 75%</div>
+          </div>
+          <span class="status">已掌握</span>
+        </div>
+        <div class="skill learning">
+          <div class="tag">义</div>
+          <div>
+            <div class="name">看字选义</div>
+            <div class="meta">练 2 次 · 正确率 50%</div>
+          </div>
+          <span class="status">学习中</span>
+        </div>
+        <div class="skill not_started">
+          <div class="tag">字</div>
+          <div>
+            <div class="name">看义选字</div>
+            <div class="meta">练 0 次 · 正确率 0%</div>
+          </div>
+          <span class="status">未开始</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">字级汇总</h2>
+      <dl class="grid">
+        <div class="stat"><dt>练习次数</dt><dd>6</dd></div>
+        <div class="stat"><dt>正确率</dt><dd>67%</dd></div>
+        <div class="stat"><dt>当前连对</dt><dd>1</dd></div>
+        <div class="stat"><dt>历史最佳</dt><dd>2</dd></div>
+        <div class="stat"><dt>下次复习</dt><dd>—</dd></div>
+        <div class="stat"><dt>首次掌握</dt><dd>—</dd></div>
+      </dl>
+    </section>
+
+    <button class="btn" type="button">标记为已学会</button>
+
+    <section>
+      <h2 class="section-title">作答记录（4）</h2>
+      <div class="history">
+        <div class="row">
+          <div class="left"><span class="pill listen">听</span> 08-29 19:12</div>
+          <span>3.2s ✅</span>
+        </div>
+        <div class="row">
+          <div class="left"><span class="pill sense">义</span> 08-29 19:10</div>
+          <span>4.1s ❌</span>
+        </div>
+        <div class="row">
+          <div class="left"><span class="pill listen">听</span> 08-28 18:02</div>
+          <span>2.8s ✅</span>
+        </div>
+        <div class="row">
+          <div class="left"><span class="pill mark">标</span> 08-20 09:00</div>
+          <span><em style="color:var(--brand)">家长标记</em> ✅</span>
+        </div>
+      </div>
+    </section>
+
+    <p class="note">
+      Mockup · 方案 1：API 扩展 skills[] + history.skill_code；精简三卡；字级六宫格保留。
+    </p>
+  </aside>
+</body>
+</html>

@@ -1,0 +1,45 @@
+services:
+  app:
+    build:
+      context: ../../../..
+      dockerfile: deploy/backend/word_agent/local_full/Dockerfile
+      args:
+        PROJECT_IMAGE: word-agent:1.0.0
+    image: word-agent:1.0.0
+    container_name: word-agent
+    restart: "no"
+    labels:
+      easy-deploy.project: "word-agent"
+      easy-deploy.container: "word-agent"
+    ports:
+      - "6017:6017"
+    env_file:
+      - ../../../../word_select_dashboard/word-agent/.env
+    environment:
+      REDIS_HOST: host.docker.internal
+      CH_HOST: host.docker.internal
+      BUSINESS_CLICKHOUSE_HOST: host.docker.internal
+      APP_PORT: 6017
+      APP_HOST: 0.0.0.0
+      WORD_AGENT_HOST: 0.0.0.0
+      WORD_AGENT_PORT: 6017
+      WORD_AGENT_GO_CONFIG_PATH: /app/server-config/config.yaml
+      WORD_AGENT_CLOZE_GENERATE_URL: http://host.docker.internal:6012/api/external/sentence-cloze/generate
+      WORD_AGENT_SELECT_DB_DSN: "host=host.docker.internal port=5432 dbname=select_english_word user=conchi password=conchi123456"
+      WORD_AGENT_ROB_WORD_DB_DSN: "host=host.docker.internal port=5432 dbname=rob_english_word user=conchi password=conchi123456"
+      WORD_AGENT_MINIO_ENDPOINT: host.docker.internal:19100
+      WORD_AGENT_MINIO_ACCESS_KEY_ID: conchi
+      WORD_AGENT_MINIO_SECRET_ACCESS_KEY: conchi123456
+      WORD_AGENT_MINIO_USE_SSL: "false"
+      WORD_AGENT_MINIO_BUCKET_NAME: ai-file-navigation
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ../../../../word_select_dashboard/word-agent/logs:/app/logs
+      - ../../../../word_select_dashboard/word-agent/tts_audio:/app/tts_audio
+      - ../../../../word_select_dashboard/server/config.yaml:/app/server-config/config.yaml:ro
+
+networks:
+  default:
+    name: vibedeploy-shared
+    external: true

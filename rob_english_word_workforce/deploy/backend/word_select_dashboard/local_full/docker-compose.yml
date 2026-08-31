@@ -1,0 +1,21 @@
+services:
+  word-select-dashboard:
+    build:
+      context: ../../../..
+      dockerfile: deploy/backend/word_select_dashboard/local_full/Dockerfile
+    image: word-select-dashboard:1.0.0
+    container_name: word-select-dashboard
+    restart: "no"
+    labels:
+      easy-deploy.project: "word-select-dashboard"
+      easy-deploy.container: "word-select-dashboard"
+    ports:
+      - "6015:6015"
+    volumes:
+      - ../../../../word_select_dashboard/server/log:/app/log
+      - ../../../../word_select_dashboard/server/uploads:/app/uploads
+
+networks:
+  default:
+    name: vibedeploy-shared
+    external: true

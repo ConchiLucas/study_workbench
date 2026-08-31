@@ -1,0 +1,18 @@
+schema_version: 1
+
+workspace:
+  workspace_paths:
+    - .env.example
+    - deploy
+    - deploy-compose-full.sh
+    - deploy-compose-down.sh
+    - docker-compose.yml
+    - scripts
+
+project_order:
+  - word_select_dashboard/server
+  - word_select_dashboard/word-agent
+  - rob_english_word_back
+  - word_select_dashboard/web-react
+  - rob_english_word_front
+  - rob_english_word_cloze_web

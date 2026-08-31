@@ -1,0 +1,26 @@
+package com.robword.controller;
+
+import com.robword.dto.AuthResponse;
+import com.robword.dto.RegisterRequest;
+import com.robword.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody com.robword.dto.LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request.getUsername(), request.getPassword()));
+    }
+}

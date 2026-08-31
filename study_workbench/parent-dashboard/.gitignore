@@ -1,0 +1,9 @@
+backend/data/
+backend/bin/
+backend/internal/http/dist/assets/
+node_modules/
+frontend/dist/
+frontend/node_modules/
+.DS_Store
+*.db
+*.log

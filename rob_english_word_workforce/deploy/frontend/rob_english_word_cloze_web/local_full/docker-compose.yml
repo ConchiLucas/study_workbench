@@ -1,0 +1,18 @@
+services:
+  rob-english-word-cloze-web:
+    build:
+      context: ../../../..
+      dockerfile: deploy/frontend/rob_english_word_cloze_web/local_full/Dockerfile
+    image: rob-english-word-cloze-web:1.0.0
+    container_name: rob-english-word-cloze-web
+    restart: "no"
+    labels:
+      easy-deploy.project: "rob-english-word-cloze-web"
+      easy-deploy.container: "rob-english-word-cloze-web"
+    ports:
+      - "6014:80"
+
+networks:
+  default:
+    name: vibedeploy-shared
+    external: true

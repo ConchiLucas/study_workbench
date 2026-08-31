@@ -1,0 +1,16 @@
+services:
+  rob-english-word-front-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rob-english-word-front-web:1.0.0
+    container_name: rob-english-word-front-web
+    restart: unless-stopped
+    ports:
+      - "${ROB_WORD_FRONT_PORT:?runtime config is required}:80"
+    environment:
+      ROB_WORD_HTTP_PORT: "${ROB_WORD_HTTP_PORT:?runtime config is required}"
+      ROB_WORD_WEBSOCKET_PORT: "${ROB_WORD_WEBSOCKET_PORT:?runtime config is required}"
+      DASHBOARD_SERVER_PORT: "${DASHBOARD_SERVER_PORT:?runtime config is required}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -1,0 +1,112 @@
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE / editor / local agent state
+.idea/
+.vscode/
+.cursor/
+.claude/
+.learnings/
+.superpowers/
+.worktrees/
+*.iml
+*.iws
+*.ipr
+
+# Secrets & local env (keep examples)
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+**/config.yaml
+!**/config.example.yaml
+
+# Runtime / local process state
+.runtime/
+.runtime-config/
+.service-runtime/
+logs/
+*.log
+*.log.*
+*.pid
+*.state
+*.tmp
+*.bak
+
+# Node / frontend
+node_modules/
+.pnp
+.pnp.js
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+.turbo/
+.parcel-cache/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Java
+target/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+.gradle/
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pytype/
+.coverage
+htmlcov/
+
+# Go
+bin/
+*.test
+.gocache/
+coverage.out
+
+# Embedded frontend builds (served by Go backends)
+**/internal/http/dist/
+
+# Local backend data / dumps
+**/backend/data/
+*.db
+*.sqlite
+*.sqlite3
+dump.rdb
+appendonly.aof
+appendonlydir/
+
+# Generated media / caches
+tts_audio/
+.cache/
+.eslintcache

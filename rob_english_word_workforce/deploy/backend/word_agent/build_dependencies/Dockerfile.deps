@@ -1,0 +1,11 @@
+ARG PROJECT_IMAGE=word-agent:1.0.0
+FROM ${PROJECT_IMAGE}
+
+ENV PYTHONUNBUFFERED=1 \
+    UV_LINK_MODE=copy
+
+WORKDIR /app
+
+COPY word_select_dashboard/word-agent/pyproject.toml word_select_dashboard/word-agent/uv.lock word_select_dashboard/word-agent/README.md ./
+COPY word_select_dashboard/word-agent/src ./src
+RUN uv sync --frozen --no-dev

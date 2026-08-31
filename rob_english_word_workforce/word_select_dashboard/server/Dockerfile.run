@@ -1,0 +1,19 @@
+FROM alpine:latest
+
+LABEL MAINTAINER="conchi"
+
+ENV TZ=Asia/Shanghai
+
+RUN apk update && apk add --no-cache tzdata openntpd ca-certificates \
+    && ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone
+
+WORKDIR /go/src/github.com/flipped-aurora/gin-vue-admin/server
+
+COPY server ./
+COPY resource ./resource/
+COPY config.docker.yaml ./
+
+EXPOSE 21417
+
+ENTRYPOINT ["./server", "-c", "config.docker.yaml"]

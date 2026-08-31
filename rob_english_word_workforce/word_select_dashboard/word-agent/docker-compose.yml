@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_IMAGE: word-agent:1.0.0
+    image: word-agent:1.0.0
+    container_name: word-agent
+    restart: unless-stopped
+    labels:
+      easy-deploy.project: "word-agent"
+      easy-deploy.container: "word-agent"
+    ports:
+      - "${WORD_AGENT_PORT:?runtime config is required}:${WORD_AGENT_PORT:?runtime config is required}"
+    environment:
+      WORD_AGENT_HOST: 0.0.0.0
+      WORD_AGENT_PORT: "${WORD_AGENT_PORT:?runtime config is required}"
+      WORD_AGENT_GO_CONFIG_PATH: /app/server-config/config.yaml
+      WORD_AGENT_CLOZE_GENERATE_URL: "${ROB_WORD_CONTAINER_URL:?runtime config is required}/api/external/sentence-cloze/generate"
+      WORD_AGENT_CLI_RUNNER_URL: "${WORD_AGENT_CONTAINER_CLI_RUNNER_URL:?runtime config is required}"
+      WORD_AGENT_SELECT_DB_DSN: "${WORD_AGENT_SELECT_DB_DSN:?runtime config is required}"
+      WORD_AGENT_ROB_WORD_DB_DSN: "${WORD_AGENT_ROB_WORD_DB_DSN:?runtime config is required}"
+      WORD_AGENT_MINIO_ENDPOINT: "${WORD_AGENT_MINIO_ENDPOINT:?runtime config is required}"
+      WORD_AGENT_MINIO_ACCESS_KEY_ID: "${WORD_AGENT_MINIO_ACCESS_KEY_ID:?runtime config is required}"
+      WORD_AGENT_MINIO_SECRET_ACCESS_KEY: "${WORD_AGENT_MINIO_SECRET_ACCESS_KEY:?runtime config is required}"
+      WORD_AGENT_MINIO_USE_SSL: "${WORD_AGENT_MINIO_USE_SSL:?runtime config is required}"
+      WORD_AGENT_MINIO_BUCKET_NAME: "${WORD_AGENT_MINIO_BUCKET_NAME:?runtime config is required}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./logs:/app/logs
+      - ./tts_audio:/app/tts_audio
+      - ../server/config.docker.yaml:/app/server-config/config.yaml:ro

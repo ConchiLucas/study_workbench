@@ -1,0 +1,26 @@
+# Local config and secrets
+config.yaml
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Build output and caches
+bin/
+build/
+dist/
+.gocache/
+*.test
+coverage.out
+
+# Logs and runtime files
+log/
+logs/
+*.log
+*.pid
+*.state
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store

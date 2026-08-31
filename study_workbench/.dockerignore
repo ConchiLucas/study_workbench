@@ -1,0 +1,11 @@
+.git
+.gitignore
+.DS_Store
+**/.DS_Store
+**/node_modules
+**/dist
+parent-dashboard/backend/bin
+parent-dashboard/backend/data
+*.log
+*.local
+.cursor

@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./rob_english_word_front
+    ports:
+      - "6111:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./rob_english_word_back
+    ports:
+      - "10111:8019"
+      - "10112:9091"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=8019
+      - NETTY_WEBSOCKET_PORT=9091
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/rob_english_word
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER:-rob_word}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD:-change-me}
+      - SPRING_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - WORD_AGENT_BASE_URL=http://host.docker.internal:8010
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=rob_english_word
+      - POSTGRES_USER=${POSTGRES_USER:-rob_word}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-change-me}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

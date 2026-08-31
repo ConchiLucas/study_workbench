@@ -1,0 +1,18 @@
+services:
+  word-select-dashboard-web-react:
+    build:
+      context: ../../../..
+      dockerfile: deploy/frontend/word_select_dashboard/local_full/Dockerfile
+    image: word-select-dashboard-web-react:1.0.0
+    container_name: word-select-dashboard-web-react
+    restart: "no"
+    labels:
+      easy-deploy.project: "word-select-dashboard-web-react"
+      easy-deploy.container: "word-select-dashboard-web-react"
+    ports:
+      - "6016:80"
+
+networks:
+  default:
+    name: vibedeploy-shared
+    external: true

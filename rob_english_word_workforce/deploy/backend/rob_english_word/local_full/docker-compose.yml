@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: ../../../..
+      dockerfile: deploy/backend/rob_english_word/local_full/Dockerfile
+    image: rob-english-word:1.0.0
+    container_name: rob-english-word
+    restart: "no"
+    labels:
+      easy-deploy.project: "rob-english-word"
+      easy-deploy.container: "rob-english-word"
+    ports:
+      - "6012:6012"
+      - "6013:6013"
+    environment:
+      SERVER_PORT: 6012
+      NETTY_WEBSOCKET_PORT: 6013
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/rob_english_word
+      SPRING_DATASOURCE_USERNAME: conchi
+      SPRING_DATASOURCE_PASSWORD: conchi123456
+      SPRING_DATA_REDIS_HOST: host.docker.internal
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_PASSWORD: "conchi123456"
+      WORD_AGENT_BASE_URL: http://host.docker.internal:6017
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    volumes:
+      - ../../../../rob_english_word_back/logs:/app/logs
+
+networks:
+  default:
+    name: vibedeploy-shared
+    external: true

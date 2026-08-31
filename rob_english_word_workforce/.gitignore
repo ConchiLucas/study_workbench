@@ -1,0 +1,105 @@
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE and local tool state
+.idea/
+.vscode/
+.claude/
+.learnings/
+.runtime/
+.runtime-config/
+.superpowers/
+*.iml
+*.iws
+*.ipr
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+word_select_dashboard/server/config.yaml
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Logs and runtime files
+logs/
+.service-runtime/
+*.log
+*.log.*
+*.pid
+*.state
+*.tmp
+*.bak
+
+# Node / frontend
+node_modules/
+.pnp
+.pnp.js
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+.turbo/
+.parcel-cache/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Java / Rust / backend build output
+target/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+.gradle/
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pytype/
+.coverage
+htmlcov/
+
+# Go
+bin/
+*.test
+.gocache/
+coverage.out
+
+# Tool caches
+.cache/
+.eslintcache
+
+# Local database dumps and files
+*.db
+*.sqlite
+*.sqlite3
+dump.rdb
+appendonly.aof
+appendonlydir/
+tts_audio/

@@ -1,0 +1,34 @@
+services:
+  word-select-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: word-select-dashboard:1.0.0
+    container_name: word-select-dashboard
+    restart: unless-stopped
+    labels:
+      easy-deploy.project: "word-select-dashboard"
+      easy-deploy.container: "word-select-dashboard"
+    ports:
+      - "${DASHBOARD_SERVER_PORT:?runtime config is required}:${DASHBOARD_SERVER_PORT:?runtime config is required}"
+    environment:
+      SELECT_DB_CONTAINER_HOST: "${SELECT_DB_CONTAINER_HOST:?runtime config is required}"
+      SELECT_DB_PORT: "${SELECT_DB_PORT:?runtime config is required}"
+      SELECT_DB_NAME: "${SELECT_DB_NAME:?runtime config is required}"
+      SELECT_DB_USER: "${SELECT_DB_USER:?runtime config is required}"
+      SELECT_DB_PASSWORD: "${SELECT_DB_PASSWORD:?runtime config is required}"
+      SELECT_DB_CONFIG: "${SELECT_DB_CONFIG:?runtime config is required}"
+      REDIS_CONTAINER_ADDR: "${REDIS_CONTAINER_ADDR:?runtime config is required}"
+      REDIS_PASSWORD: "${REDIS_PASSWORD-}"
+      MINIO_CONTAINER_ENDPOINT: "${MINIO_CONTAINER_ENDPOINT:?runtime config is required}"
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY:?runtime config is required}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY:?runtime config is required}"
+      MINIO_BUCKET: "${MINIO_BUCKET:?runtime config is required}"
+      MINIO_USE_SSL: "${MINIO_USE_SSL:?runtime config is required}"
+      WORD_AGENT_CONTAINER_URL: "${WORD_AGENT_CONTAINER_URL:?runtime config is required}"
+      DASHBOARD_SERVER_PORT: "${DASHBOARD_SERVER_PORT:?runtime config is required}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./log:/app/log
+      - ./uploads:/app/uploads

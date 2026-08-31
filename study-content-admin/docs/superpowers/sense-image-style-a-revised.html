@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>义图 A · 按 GitHub 闪卡惯例修订</title>
+  <style>
+    :root {
+      --ink: #1c1c1c;
+      --muted: #66706a;
+      --line: #ddd6cc;
+      --ok: #1f6f5b;
+      --bad: #a14a3a;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, #e7f3ef 0, transparent 42%),
+        linear-gradient(180deg, #f6f1e8, #f3f6f4 50%, #efe8dc);
+      padding: 28px 22px 64px;
+    }
+    h1 {
+      font-family: "Songti SC", "Noto Serif SC", serif;
+      font-size: 1.55rem;
+      margin: 0 0 8px;
+      letter-spacing: 0.03em;
+    }
+    .lead, .note {
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 920px;
+      margin: 0 0 18px;
+      font-size: 0.92rem;
+    }
+    .sources {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 0 0 26px;
+    }
+    .sources a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+    }
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      max-width: 920px;
+      margin-bottom: 28px;
+    }
+    .rule {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .rule strong { display: block; margin-bottom: 4px; font-size: 0.92rem; }
+    .rule span { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+
+    h2 {
+      font-family: "Songti SC", "Noto Serif SC", serif;
+      font-size: 1.15rem;
+      margin: 28px 0 10px;
+    }
+    .compare {
+      display: grid;
+      grid-template-columns: 52px 1fr 1fr;
+      gap: 12px;
+      max-width: 920px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+    .char {
+      display: grid; place-items: center;
+      font-family: "Songti SC", "Noto Serif SC", serif;
+      font-size: 1.7rem;
+    }
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--paper);
+      min-height: 150px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+    .tile .badge {
+      position: absolute; left: 10px; top: 8px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .tile.bad .badge { color: var(--bad); }
+    .tile.good .badge { color: var(--ok); }
+    .tile .cap {
+      position: absolute; left: 10px; right: 10px; bottom: 8px;
+      font-size: 0.72rem; color: var(--muted); line-height: 1.35;
+    }
+    .hdr {
+      display: grid;
+      grid-template-columns: 52px 1fr 1fr;
+      gap: 12px;
+      max-width: 920px;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== OLD abstract (what felt unintuitive) ===== */
+    .old-fire { background: #fff8e8; }
+    .old-fire .blob {
+      width: 42%; aspect-ratio: 1; border-radius: 50%;
+      background: #ffb84d; box-shadow: 0 0 0 12px #ffe0a3;
+    }
+    .old-shan { background: #eef6fb; }
+    .old-shan .t {
+      width: 0; height: 0;
+      border-left: 34px solid transparent;
+      border-right: 34px solid transparent;
+      border-bottom: 54px solid #5aa0c8;
+      margin-bottom: 28px;
+    }
+    .old-shui { background: #eaf6ff; }
+    .old-shui .w {
+      width: 58%; height: 10px; border: 3px solid #4aa3d8;
+      border-top: 0; border-radius: 0 0 50% 50%; margin: 6px 0;
+    }
+
+    /* ===== NEW: flashcard formula SVGs ===== */
+    svg.icon { width: 62%; height: 62%; overflow: visible; }
+    .prompt {
+      max-width: 920px;
+      background: #13201c;
+      color: #d7ebe4;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      margin-top: 18px;
+      white-space: pre-wrap;
+    }
+    .prompt strong { color: #9fe0cb; }
+  </style>
+</head>
+<body>
+  <h1>A 风格修订：按开源闪卡惯例做「一眼认得」</h1>
+  <p class="lead">
+    你说之前不够直观——对。我之前画成了「几何隐喻」（圆=火、三角=山），学龄闪卡很少这么干。
+    GitHub / 儿童闪卡常见做法是：<strong>白底上放一个具体物体</strong>，像贴纸一样，而不是抽象符号。
+  </p>
+  <div class="sources">
+    <a href="https://github.com/seanthegeek/alphabet-flashcards" target="_blank" rel="noreferrer">alphabet-flashcards · 插画 prompt</a>
+    <a href="https://github.com/clover327/mq-hanzi-card" target="_blank" rel="noreferrer">mq-hanzi-card · 儿童字源卡 + AI 插画</a>
+    <a href="https://imaginewithrashid.com/chatgpt-prompts-to-create-printable-flashcards-for-kids/" target="_blank" rel="noreferrer">Printable kids flashcards · flat vector</a>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><strong>1. 纯白底</strong><span>不要场景、草地、天空铺满</span></div>
+    <div class="rule"><strong>2. 单个主体居中</strong><span>一张图只表达一个意思</span></div>
+    <div class="rule"><strong>3. 粗描边 + 圆角</strong><span>flat cartoon / 填色书感</span></div>
+    <div class="rule"><strong>4. 无字无阴影</strong><span>图上不写汉字；少投影</span></div>
+    <div class="rule"><strong>5. 具象可指认</strong><span>火=火焰，山=山峰，不是色块</span></div>
+  </div>
+
+  <h2>同一批字：抽象隐喻 ❌ vs 闪卡具象 ✅</h2>
+  <div class="hdr"><div></div><div>之前（抽象，不直观）</div><div>修订 A（闪卡惯例）</div></div>
+
+  <div class="compare">
+    <div class="char">火</div>
+    <div class="tile bad old-fire"><span class="badge">旧</span><div class="blob"></div><div class="cap">圆色块 ≈ 太阳？孩子不一定联想到「火」</div></div>
+    <div class="tile good">
+      <span class="badge">新 A</span>
+      <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60 18c8 18-14 26-6 48 4 12 18 18 18 30 0 14-12 20-18 20s-18-6-18-20c0-12 14-18 18-30 8-22-14-30-6-48z" fill="#ff7a3d" stroke="#1c1c1c" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M60 58c4 8-4 12-1 22 1 5 6 8 6 12 0 6-4 8-5 8s-5-2-5-8c0-4 5-7 6-12 3-10-5-14-1-22z" fill="#ffe066" stroke="#1c1c1c" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+      <div class="cap">明确火焰形 + 粗黑边，一眼是火</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="char">山</div>
+    <div class="tile bad old-shan"><span class="badge">旧</span><div class="t"></div><div class="cap">一个蓝三角，像几何课不是山景</div></div>
+    <div class="tile good">
+      <span class="badge">新 A</span>
+      <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M18 92 L44 42 L70 92 Z" fill="#7ec8a3" stroke="#1c1c1c" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M48 92 L78 28 L108 92 Z" fill="#4f9d78" stroke="#1c1c1c" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M72 48 L78 28 L84 48 Z" fill="#ffffff" stroke="#1c1c1c" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+      <div class="cap">重叠山峰 + 小雪顶，仍是白底贴纸</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="char">水</div>
+    <div class="tile bad old-shui"><span class="badge">旧</span><div><div class="w"></div><div class="w"></div><div class="w"></div></div><div class="cap">三道弧线偏符号，幼儿要猜</div></div>
+    <div class="tile good">
+      <span class="badge">新 A</span>
+      <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60 16c22 28 34 46 34 62 0 18-15 30-34 30S26 96 26 78c0-16 12-34 34-62z" fill="#5ec4ef" stroke="#1c1c1c" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M48 70c6-2 10 2 14 0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+        <path d="M46 82c8-2 14 2 18 0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <div class="cap">水滴造型，常见闪卡「具体物」</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="char">口</div>
+    <div class="tile bad" style="background:#fff5f0"><span class="badge">旧</span>
+      <div style="width:46%;aspect-ratio:1;border-radius:50%;background:#ffd4a8;border:3px solid #e8a060;position:relative">
+        <i style="position:absolute;top:36%;left:28%;width:8px;height:8px;border-radius:50%;background:#5a3a28"></i>
+        <i style="position:absolute;top:36%;right:28%;width:8px;height:8px;border-radius:50%;background:#5a3a28"></i>
+        <i style="position:absolute;left:30%;right:30%;bottom:28%;height:14px;border-radius:0 0 16px 16px;background:#e85d5d"></i>
+      </div>
+      <div class="cap">整张脸 → 容易理解成「人/脸」</div>
+    </div>
+    <div class="tile good">
+      <span class="badge">新 A</span>
+      <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+        <ellipse cx="60" cy="62" rx="38" ry="28" fill="#ff8f8f" stroke="#1c1c1c" stroke-width="4"/>
+        <path d="M30 62 Q60 88 90 62" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round"/>
+        <path d="M38 58 Q60 42 82 58" fill="#ffffff" stroke="#1c1c1c" stroke-width="3"/>
+      </svg>
+      <div class="cap">只画「张开的嘴巴」，对准「口」</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="char">目</div>
+    <div class="tile bad" style="background:#f3f7ff"><span class="badge">旧</span>
+      <div style="width:58%;height:38%;border:4px solid #3d5a80;border-radius:50%;background:#fff;position:relative">
+        <i style="position:absolute;left:50%;top:50%;width:28%;aspect-ratio:1;border-radius:50%;background:#3d7ea6;transform:translate(-50%,-50%)"></i>
+      </div>
+      <div class="cap">方向对，但缺描边统一感</div>
+    </div>
+    <div class="tile good">
+      <span class="badge">新 A</span>
+      <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+        <ellipse cx="60" cy="60" rx="46" ry="28" fill="#ffffff" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="60" cy="60" r="16" fill="#3d8fbf" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="60" cy="60" r="7" fill="#1c1c1c"/>
+        <circle cx="54" cy="54" r="3" fill="#ffffff"/>
+      </svg>
+      <div class="cap">单只大眼睛贴纸，身体部位类标准做法</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="char">花</div>
+    <div class="tile bad" style="background:#fff7fb"><span class="badge">旧</span>
+      <div style="position:relative;width:70%;height:70%">
+        <i style="position:absolute;top:18%;left:35%;width:30%;height:30%;border-radius:50%;background:#f5a0c8"></i>
+        <i style="position:absolute;top:35%;left:12%;width:30%;height:30%;border-radius:50%;background:#f5a0c8"></i>
+        <i style="position:absolute;top:35%;right:12%;width:30%;height:30%;border-radius:50%;background:#f5a0c8"></i>
+        <i style="position:absolute;bottom:18%;left:22%;width:30%;height:30%;border-radius:50%;background:#f5a0c8"></i>
+        <i style="position:absolute;bottom:18%;right:22%;width:30%;height:30%;border-radius:50%;background:#f5a0c8"></i>
+        <i style="position:absolute;left:42%;top:42%;width:16%;aspect-ratio:1;border-radius:50%;background:#ffd76a"></i>
+      </div>
+      <div class="cap">粉团可以，但缺统一黑边</div>
+    </div>
+    <div class="tile good">
+      <span class="badge">新 A</span>
+      <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+        <rect x="57" y="70" width="6" height="28" rx="3" fill="#5fad5a" stroke="#1c1c1c" stroke-width="3"/>
+        <circle cx="60" cy="28" r="16" fill="#ff8ec8" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="36" cy="48" r="16" fill="#ff8ec8" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="84" cy="48" r="16" fill="#ff8ec8" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="44" cy="72" r="16" fill="#ff8ec8" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="76" cy="72" r="16" fill="#ff8ec8" stroke="#1c1c1c" stroke-width="4"/>
+        <circle cx="60" cy="54" r="12" fill="#ffd166" stroke="#1c1c1c" stroke-width="4"/>
+      </svg>
+      <div class="cap">五瓣花 + 茎，经典儿童闪卡物</div>
+    </div>
+  </div>
+
+  <div class="prompt"><strong>落地 prompt 骨架（对齐 alphabet-flashcards）：</strong>
+Create a clean, child-friendly cartoon illustration of [具体物体，例如 a bright orange flame / a green mountain with a snow tip / a single blue water droplet / an open smiling mouth / one large friendly eye / a pink five-petal flower with stem], centered on a pure white background. Flat vector style, thick black outlines, bright solid colors, smooth rounded shapes. No text, no Chinese characters, no shadows, no extra objects, no scenery background.</div>
+
+  <p class="note">抽象字（一/大/上）仍要用<strong>固定隐喻物</strong>（如一根金条、张臂小人、向上箭头），但画法同样遵守：白底、单物、粗边、无字。</p>
+</body>
+</html>

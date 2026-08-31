@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: conchi
+      POSTGRES_PASSWORD: conchi123456
+      POSTGRES_DB: study_workbench
+    ports:
+      - "15432:5432"
+    volumes:
+      - study_workbench_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U conchi -d study_workbench"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+
+  seed:
+    build:
+      context: .
+      dockerfile: parent-dashboard/backend/Dockerfile
+      target: seed
+    environment: &db_env
+      APP_DB_DRIVER: postgres
+      APP_DB_HOST: postgres
+      APP_DB_PORT: "5432"
+      APP_DB_USER: conchi
+      APP_DB_PASSWORD: conchi123456
+      APP_DB_NAME: study_workbench
+      APP_DB_CONFIG: sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  backend:
+    build:
+      context: .
+      dockerfile: parent-dashboard/backend/Dockerfile
+      target: backend
+      args:
+        VITE_KID_APP_URL: http://localhost:19082
+    environment:
+      <<: *db_env
+      APP_ADDR: :19081
+    ports:
+      - "19081:19081"
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  kid-app:
+    build:
+      context: .
+      dockerfile: kid-app/Dockerfile
+    ports:
+      - "19082:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  study_workbench_pg:

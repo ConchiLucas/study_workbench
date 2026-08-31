@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "19091:19091"
+    environment:
+      APP_ADDR: :19091
+      SHARED_CONFIG_CENTER_BASE_URL: ${SHARED_CONFIG_CENTER_BASE_URL:-http://shared-config-center-api:8080}
+      APP_DB_HOST: ${APP_DB_HOST:-host.docker.internal}
+      APP_DB_PORT: ${APP_DB_PORT:-15432}
+      APP_DB_USER: ${APP_DB_USER:-conchi}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:-conchi123456}
+      APP_DB_NAME: ${APP_DB_NAME:-study_workbench}
+      APP_DB_CONFIG: sslmode=disable
+      APP_MINIO_PUBLIC_BASE: ${APP_MINIO_PUBLIC_BASE:-http://localhost:19100}
+      APP_PUBLIC_BASE: ${APP_PUBLIC_BASE:-http://localhost:19091}
+      GLYPH_FONT_PATH: /app/assets/fonts/NotoSerifSC-Regular.otf
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      default: {}
+      vibedeploy-shared: {}
+    restart: unless-stopped
+
+networks:
+  vibedeploy-shared:
+    name: vibedeploy-shared
+    external: true

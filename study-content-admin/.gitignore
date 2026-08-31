@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+*.local
+node_modules/
+frontend/dist/
+backend/bin/
+.idea/
+.vscode/
+
+.superpowers/

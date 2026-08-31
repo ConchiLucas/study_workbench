@@ -1,0 +1,18 @@
+services:
+  rob-english-word-front-web:
+    build:
+      context: ../../../..
+      dockerfile: deploy/frontend/rob_english_word_front/local_full/Dockerfile
+    image: rob-english-word-front-web:1.0.0
+    container_name: rob-english-word-front-web
+    restart: "no"
+    labels:
+      easy-deploy.project: "rob-english-word-front-web"
+      easy-deploy.container: "rob-english-word-front-web"
+    ports:
+      - "6011:80"
+
+networks:
+  default:
+    name: vibedeploy-shared
+    external: true

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+}
+
+.kid-root {
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.kid-paper {
+  background-color: #fff6ec;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(255, 180, 162, 0.22) 0, transparent 42%),
+    radial-gradient(circle at 82% 16%, rgba(159, 212, 245, 0.22) 0, transparent 40%),
+    radial-gradient(circle at 72% 86%, rgba(155, 230, 196, 0.24) 0, transparent 44%),
+    radial-gradient(circle at 24% 88%, rgba(255, 222, 138, 0.24) 0, transparent 40%);
+}

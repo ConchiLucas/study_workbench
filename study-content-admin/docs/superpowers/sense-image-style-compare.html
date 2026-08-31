@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>义图风格方向 · 对比</title>
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --paper: #f7f4ef;
+      --line: #d9d2c8;
+      --muted: #6b6560;
+      --accent: #2a6f6a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Noto Sans SC", sans-serif;
+      background: linear-gradient(165deg, #efe8dc 0%, #f7f4ef 40%, #e8f0ee 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 28px 24px 48px;
+    }
+    h1 {
+      font-family: "Songti SC", "Noto Serif SC", serif;
+      font-weight: 600;
+      font-size: 1.75rem;
+      margin: 0 0 6px;
+      letter-spacing: 0.04em;
+    }
+    .lead {
+      color: var(--muted);
+      margin: 0 0 28px;
+      max-width: 42rem;
+      line-height: 1.55;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      max-width: 980px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(40, 30, 20, 0.06);
+    }
+    .preview {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .meta { padding: 14px 16px 16px; }
+    .meta .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .meta h2 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      font-family: "Songti SC", "Noto Serif SC", serif;
+    }
+    .meta p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .rec {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .rec .meta .tag::after { content: " · 推荐"; }
+
+    /* A · flat kids illustration */
+    .a {
+      background: #fff8e8;
+      display: grid;
+      place-items: center;
+    }
+    .a .sun {
+      width: 42%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #ffb84d;
+      box-shadow: 0 0 0 14px #ffe0a3;
+      position: relative;
+    }
+    .a .ray {
+      position: absolute; inset: -28%;
+      background:
+        conic-gradient(from 0deg, transparent 0 18deg, #ffd27a 18deg 28deg, transparent 28deg 45deg);
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0.9;
+    }
+    .a .label {
+      position: absolute; bottom: 12px; right: 14px;
+      font-size: 2rem; font-family: "Songti SC", serif; color: #c47a1a; opacity: 0.35;
+    }
+
+    /* B · soft storybook watercolor */
+    .b {
+      background:
+        radial-gradient(circle at 30% 35%, #ffd4a8 0%, transparent 45%),
+        radial-gradient(circle at 70% 60%, #9ec9ff 0%, transparent 50%),
+        linear-gradient(180deg, #f3efe6, #e8dcc8);
+    }
+    .b .blob {
+      position: absolute;
+      width: 48%; height: 48%;
+      left: 26%; top: 28%;
+      border-radius: 42% 58% 55% 45%;
+      background: radial-gradient(circle at 40% 35%, #ff9a4a, #e85d2a 70%, #b83a18);
+      filter: blur(0.4px);
+      opacity: 0.92;
+      box-shadow: 0 18px 40px rgba(180, 70, 30, 0.25);
+    }
+    .b .wash {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 80%, rgba(255,255,255,0.35), transparent 55%);
+    }
+    .b .label {
+      position: absolute; bottom: 12px; right: 14px;
+      font-size: 2rem; font-family: "Songti SC", serif; color: #8a5a3a; opacity: 0.3;
+    }
+
+    /* C · photo-real */
+    .c {
+      background:
+        linear-gradient(180deg, #1a120c 0%, #3d2418 40%, #0d0a08 100%);
+    }
+    .c::before {
+      content: "";
+      position: absolute;
+      left: 18%; right: 18%; bottom: 18%; top: 35%;
+      background:
+        radial-gradient(ellipse at 50% 20%, #fff6c8 0%, #ffb347 25%, #ff6a00 55%, transparent 70%),
+        radial-gradient(ellipse at 50% 70%, #ff4500, #4a1808 80%);
+      filter: blur(6px);
+      opacity: 0.95;
+    }
+    .c .label {
+      position: absolute; bottom: 12px; right: 14px;
+      font-size: 2rem; font-family: "Songti SC", serif; color: #fff; opacity: 0.25;
+    }
+
+    /* D · minimal icon */
+    .d {
+      background: #f4f6f5;
+      display: grid;
+      place-items: center;
+    }
+    .d svg { width: 46%; height: 46%; }
+    .d .label {
+      position: absolute; bottom: 12px; right: 14px;
+      font-size: 2rem; font-family: "Songti SC", serif; color: #2a6f6a; opacity: 0.28;
+    }
+
+    .note {
+      margin-top: 22px;
+      max-width: 980px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>义图风格 · 示意对比（以「火」为例）</h1>
+  <p class="lead">这些是方向示意，不是最终 AI 出图。请选一个主风格——后续所有要义图的字（约 119 个）会共用同一套 prompt 锁死风格，保证和字图一样「全员一致」。</p>
+
+  <div class="grid">
+    <article class="card rec">
+      <div class="preview a">
+        <div class="sun"><div class="ray"></div></div>
+        <span class="label">火</span>
+      </div>
+      <div class="meta">
+        <div class="tag">A</div>
+        <h2>儿童扁平插画</h2>
+        <p>干净、友好、辨识快；最适合学龄识字闪卡，成本与一致性最好控。</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview b">
+        <div class="blob"></div>
+        <div class="wash"></div>
+        <span class="label">火</span>
+      </div>
+      <div class="meta">
+        <div class="tag">B</div>
+        <h2>绘本水彩 / 柔和故事风</h2>
+        <p>更有温度，但批次一致性难；适合精品少图，不适合 100+ 批量。</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview c">
+        <span class="label">火</span>
+      </div>
+      <div class="meta">
+        <div class="tag">C</div>
+        <h2>写实照片风</h2>
+        <p>真实感强，但儿童端偏硬、抽象字难画、安全审核更敏感。</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview d">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 8c4 10-6 14-2 26 2 8 10 12 10 20 0 8-8 10-10 10s-10-2-10-10c0-8 8-12 10-20 4-12-6-16-2-26z" fill="#2a6f6a"/>
+        </svg>
+        <span class="label">火</span>
+      </div>
+      <div class="meta">
+        <div class="tag">D</div>
+        <h2>极简图标</h2>
+        <p>像 emoji/符号，统一性极高，但「看图知义」的信息量偏少。</p>
+      </div>
+    </article>
+  </div>
+
+  <p class="note">当前库：约 <strong>119</strong> 字要义图，<strong>11</strong> 字（虚词等）跳过。可用图片模型：Gemini Image / Grok Imagine（Config Center 已配）。</p>
+</body>
+</html>

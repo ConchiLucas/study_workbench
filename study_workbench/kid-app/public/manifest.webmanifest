@@ -1,0 +1,25 @@
+{
+  "name": "卢沁一 · 练一练",
+  "short_name": "练一练",
+  "description": "每天一份练习，做完得小红花",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#FFF6EC",
+  "theme_color": "#FFF6EC",
+  "icons": [
+    {
+      "src": "/kid-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/kid-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

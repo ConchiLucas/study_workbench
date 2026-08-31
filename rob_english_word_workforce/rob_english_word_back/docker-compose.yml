@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rob-english-word:1.0.0
+    container_name: rob-english-word
+    restart: unless-stopped
+    ports:
+      - "${ROB_WORD_HTTP_PORT:?runtime config is required}:8019"
+      - "${ROB_WORD_WEBSOCKET_PORT:?runtime config is required}:9091"
+    environment:
+      SPRING_DATASOURCE_URL: "${SPRING_DATASOURCE_URL:?runtime config is required}"
+      SPRING_DATASOURCE_USERNAME: "${SPRING_DATASOURCE_USERNAME:?runtime config is required}"
+      SPRING_DATASOURCE_PASSWORD: "${SPRING_DATASOURCE_PASSWORD:?runtime config is required}"
+      SPRING_DATA_REDIS_HOST: "${SPRING_DATA_REDIS_HOST:?runtime config is required}"
+      SPRING_DATA_REDIS_PORT: "${SPRING_DATA_REDIS_PORT:?runtime config is required}"
+      SPRING_DATA_REDIS_PASSWORD: "${SPRING_DATA_REDIS_PASSWORD-}"
+      SERVER_PORT: 8019
+      NETTY_WEBSOCKET_PORT: 9091
+      WORD_AGENT_BASE_URL: "${WORD_AGENT_CONTAINER_URL:?runtime config is required}"
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./logs:/app/logs

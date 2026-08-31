@@ -1,0 +1,17 @@
+services:
+  word-select-dashboard-web-react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: word-select-dashboard-web-react:1.0.0
+    container_name: word-select-dashboard-web-react
+    restart: unless-stopped
+    labels:
+      easy-deploy.project: "word-select-dashboard-web-react"
+      easy-deploy.container: "word-select-dashboard-web-react"
+    ports:
+      - "${DASHBOARD_WEB_PORT:?runtime config is required}:80"
+    environment:
+      DASHBOARD_SERVER_PORT: "${DASHBOARD_SERVER_PORT:?runtime config is required}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
