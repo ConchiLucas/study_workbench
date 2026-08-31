@@ -55,7 +55,7 @@ npm install && npm run dev    # http://localhost:19082
 ## 目录
 
 ```
-study_workbench/
+kid-workbench/
 ├── docker-compose.yml
 ├── parent-dashboard/
 │   ├── backend/     # Go API（Docker 内嵌家长看板静态资源）
